@@ -1,0 +1,98 @@
+<% if @group.nil? %>
+    <ol class="breadcrumb">
+        <li><a href="<%= reading_lists_path %>">Home</a></li>
+        <li class="active"><%= @reading_list.name %></li>
+    </ol>
+<% else %>
+    <ol class="breadcrumb">
+        <li><a href="<%= reading_lists_path %>">Home</a></li>
+        <li><a href="<%= group_path @group %>"><%= @group.name %></a></li>
+        <li class="active"><%= @reading_list.name %></li>
+    </ol>
+<% end %>
+<div class="page-header">
+    <h1><%= @reading_list.name %></h1>
+</div>
+<% if !@is_owner %>
+    <% if @has_modify_rights %>
+        <div class="label label-info">This list is shared with ReadWrite permissions. You can add/remove papers in this list.</div>
+    <% else %>
+        <div class="label label-warning">This list is shared with ReadOnly permissions. You cannot add/remove papers in this list.</div>
+    <% end %>
+    <br/><br/>
+<% end %>
+<div class="row">
+    <div class="col-md-12">
+        <div id="paper-listing">
+            <%= render :partial => 'paper_list' %>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <% if @has_modify_rights %>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Search for Papers</div>
+                <div class="panel-body">
+                    <%= form_tag({:action => 'search', :controller => 'remote_library'}, :remote => true, :class => 'form' , :'data-update-target' => 'update-container') do %>
+                        <label for="query">Search</label>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <%= text_field_tag 'query', nil, :class => 'form-control', :placeholder => 'Keywords'  %>
+                            </div>
+                            <div class="form-group">
+                                <label class="radio">
+                                    <%= radio_button_tag 'db', 'acm', true %> ACM
+                                </label>
+                                <label class="radio">
+                                    <%= radio_button_tag 'db', 'ieee' %> IEEE
+                                </label>
+                            </div>
+                            <%= submit_tag 'Go', :disable_with => 'Searching...', :class => 'btn btn-primary', :onclick => 'submit_search_form()' %>
+                        </div>
+                        <%= hidden_field_tag 'reading_list_id', @reading_list.id %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+    <% if @is_owner %>
+        <%= render 'form', :form_title => 'Rename Reading List' %>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Sharing</div>
+                <div class="panel-body">
+                    <% owned_groups = current_user.owned_groups.all %>
+                    <% if owned_groups.length > 0 %>
+                        <%= render :partial => 'reading_list_shares' %>
+                        <div class="form form-inline">
+                            <% remaining_groups = ReadingListsHelper::get_unshared_groups(@reading_list, owned_groups) %>
+                            <% if remaining_groups.length > 0 %>
+                                <%= form_for @reading_list_share do |f| %>
+                                    <% options = [] %>
+                                    <% remaining_groups.each do |g| options << [g.name, g.id] end %>
+                                    <%= f.select :group_id, options_for_select(options), {}, :class => 'form-control' %>
+                                    <% options = [["Read & Write", "readwrite"], ["Read Only", "readonly"]] %>
+                                    <%= f.select :access_rights, options_for_select(options), {}, :class => 'form-control' %>
+                                    <%= f.hidden_field :reading_list_id, :value => @reading_list.id %>
+                                    <%= f.submit 'Share', :class => 'btn btn-primary' %>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    <% else %>
+                        <div class="alert alert-info">
+                            You do not have any groups to share with. Click on 'My Groups' to start
+                            creating groups.
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div id="update-container"></div>
+    </div>
+</div>
+

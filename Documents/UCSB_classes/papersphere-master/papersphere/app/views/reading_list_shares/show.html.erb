@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Group:</b>
+  <%= @reading_list_share.group_id %>
+</p>
+
+<p>
+  <b>Reading list:</b>
+  <%= @reading_list_share.reading_list_id %>
+</p>
+
+<p>
+  <b>Access rights:</b>
+  <%= @reading_list_share.access_rights %>
+</p>
+
+
+<%= link_to 'Edit', edit_reading_list_share_path(@reading_list_share) %> |
+<%= link_to 'Back', reading_list_shares_path %>

@@ -1,0 +1,15 @@
+<tr>
+    <td>
+        <%= form_tag({:controller => 'reading_list_papers', :action=> 'remove_paper_from_list'}, :remote => true, :method => :delete) do %>
+            <%= hidden_field_tag :reading_list_id, @reading_list.id %>
+            <%= hidden_field_tag :paper_id, paper.id %>
+            <%= submit_tag 'Remove', :disable_with => 'Please wait...', :class => 'btn btn-danger btn-sm', :disabled => !(@is_owner or @has_modify_rights), :data => { :confirm => 'Are you sure?' } %>
+        <% end %>
+    </td>
+    
+    <td><%= link_to paper.title, @reading_list.reading_list_papers.select { |rlp| rlp.paper_id == paper.id }.first %></td>
+    <td><%= paper.author %></td>
+    <td><%= paper.year %></td>
+    <td><%= paper.publication %></td>
+    <td><%= link_to 'Source URL', paper.url %></td>
+</tr>

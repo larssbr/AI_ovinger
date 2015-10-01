@@ -1,0 +1,9 @@
+<tr>
+    <td>
+        <%= button_to 'Remove', reading_list_paper, :method => :delete, :remote => true, :data => { :confirm => 'Are you sure?' } %>
+    </td>
+    <td><%= reading_list_paper.paper.title %></td>
+    <td><%= reading_list_paper.paper.author %></td>
+    <td><%= reading_list_paper.paper.year %></td>
+    <td><%= reading_list_paper.paper.publication %></td>
+</tr>

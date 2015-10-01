@@ -1,0 +1,91 @@
+<% force_login_helper %>
+
+<!-- *****************************************************************************************************************
+ HEADERWRAP
+ ***************************************************************************************************************** -->
+<div id="headerwrap">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1">
+        <h1>Create a project and share it with the world!</h1>
+
+        <h3>Ain't nothing you can't do!</h3>
+      </div>
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div><!-- /headerwrap -->
+
+<div class="container mt">
+  <div class="panel panel-default">
+    <%= render partial: 'static_pages/panel_header', locals: {title: 'Recent Projects', target: 'recent-projects'} %>
+    <%= solid_portfolio wrapper_options: {class: 'panel-collapse collapse in portfolio', id: 'recent-projects'} do %>
+        <% @projects.each do |project| %>
+            <%= solid_portfolio_item project.title,
+                                     project.thumbnail,
+                                     project.thumbnail,
+                                     project_path(project)
+            %>
+        <% end %>
+    <% end %>
+    <!--/Portfoliowrap -->
+  </div>
+</div>
+<div class="container mt">
+  <div class="panel panel-default">
+    <%= render partial: 'static_pages/panel_header', locals: {title: 'Recent Galleries', target: 'recent-galleries'} %>
+    <%= solid_portfolio wrapper_options: {class: 'panel-collapse collapse in portfolio', id: 'recent-galleries'} do %>
+        <% @galleries.each do |gallery| %>
+            <%= solid_portfolio_item gallery.title,
+                                     gallery.thumbnail,
+                                     gallery.thumbnail,
+                                     gallery_path(gallery)
+            %>
+        <% end %>
+    <% end %>
+    <!--/Portfoliowrap -->
+  </div>
+</div>
+
+<!-- *****************************************************************************************************************
+ SERVICE LOGOS
+ ***************************************************************************************************************** -->
+<div id="service">
+  <div class="container">
+    <div class="row centered">
+      <div class="col-md-4">
+        <i class="fa fa-heart-o"></i>
+        <h4>Handsomely Crafted</h4>
+
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.</p>
+
+        <p><br/><a href="#" class="btn btn-theme">More Info</a></p>
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-flask"></i>
+        <h4>Retina Ready</h4>
+
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.</p>
+
+        <p><br/><a href="#" class="btn btn-theme">More Info</a></p>
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-trophy"></i>
+        <h4>Quality Theme</h4>
+
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.</p>
+
+        <p><br/><a href="#" class="btn btn-theme">More Info</a></p>
+      </div>
+    </div>
+  </div>
+  <!-- /container -->
+</div><!-- /service -->
+

@@ -1,0 +1,24 @@
+<h1>Listing reading_list_papers</h1>
+
+<table>
+  <tr>
+    <th>Reading list</th>
+    <th>Paper</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @reading_list_papers.each do |reading_list_paper| %>
+  <tr>
+    <td><%= reading_list_paper.reading_list_id %></td>
+    <td><%= link_to reading_list_paper.paper_id, reading_list_paper %></td>
+    <td><%= link_to 'Show', reading_list_paper %></td>
+    <td><%= link_to 'Destroy', reading_list_paper, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Reading list paper', new_reading_list_paper_path %>

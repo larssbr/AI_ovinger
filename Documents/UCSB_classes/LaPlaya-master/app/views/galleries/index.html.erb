@@ -1,0 +1,26 @@
+<h1>Listing galleries</h1>
+
+<%= link_to 'New Gallery', new_gallery_path, class: 'btn btn-success btn-sm' if can? :create, Gallery %>
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @galleries.each do |gallery| %>
+      <tr>
+        <td><%= gallery.title %></td>
+        <td><%= link_to 'Show', gallery, class: 'btn btn-info btn-sm' %></td>
+        <% if can? :edit, gallery %>
+            <td><%= link_to 'Edit', edit_gallery_path(gallery), class: 'btn btn-warning btn-sm' %></td>
+        <% end %>
+        <% if can? :destroy, gallery %>
+            <td><%= link_to 'Destroy', gallery, class: 'btn btn-danger btn-sm', method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

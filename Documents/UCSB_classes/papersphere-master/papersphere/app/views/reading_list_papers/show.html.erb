@@ -1,0 +1,94 @@
+<ol class="breadcrumb">
+    <li><a href="<%= reading_lists_path %>">Home</a></li>
+    <li><a href="<%= reading_list_url @reading_list %>"><%= @reading_list.name %></a></li>
+    <li class="active"><%= @paper.title.truncate(40) %></li>
+</ol>
+<div class="page-header">
+    <h1><%= @paper.title %></h1>
+</div>
+<div class="panel panel-default reading-list-paper-panel">
+  
+  <div class="panel-heading">
+    <h3 class="panel-title">Paper Details</h3>
+  </div>
+  
+  <div class="panel-body">
+      <table class="table table-hover table-bordered">
+          <tr>
+              <td class="paper-info-header">Author</td>
+              <td><%= @paper.author %></td>
+          </tr>
+          <tr>
+              <td class="paper-info-header">Year</td>
+              <td><%= @paper.year %></td>
+          </tr>
+          <tr>
+              <td class="paper-info-header">Publication</td>
+              <td><%= @paper.publication %></td>
+          </tr>
+          <tr>
+              <td class="paper-info-header">Your Rating</td>
+              <td>
+                  <%= form_for(rating_to_use_for_form, remote: true, :html => { :class => 'rating_ballot' }) do |f| %>
+                  <%= f.label("value_1", content_tag(:span, '1'), {:class=>"rating", :id=>"1"}) %>
+                  <%= radio_button_tag("rating[value]", 1, current_user_rating == 1, :class => 'rating_button') %>
+                  <%= f.label("value_2", content_tag(:span, '2'), {:class=>"rating", :id=>"2"}) %>
+                  <%= radio_button_tag("rating[value]", 2, current_user_rating == 2, :class => 'rating_button') %>
+                  <%= f.label("value_3", content_tag(:span, '3'), {:class=>"rating", :id=>"3"}) %>
+                  <%= radio_button_tag("rating[value]", 3, current_user_rating == 3, :class => 'rating_button') %>
+                  <%= f.label("value_4", content_tag(:span, '4'), {:class=>"rating", :id=>"4"}) %>
+                  <%= radio_button_tag("rating[value]", 4, current_user_rating == 4, :class => 'rating_button') %>
+                  <%= f.label("value_5", content_tag(:span, '5'), {:class=>"rating", :id=>"5"}) %>
+                  <%= radio_button_tag("rating[value]", 5, current_user_rating == 5, :class => 'rating_button') %>
+
+                  <%= hidden_field_tag("reading_list_paper_id", @reading_list_paper.id) %>
+                  <% end %>
+              </td>
+          </tr>
+          <tr>
+              <td class="paper-info-header">Overall Rating</td>
+              <td>
+                  <% if @reading_list_paper.global_rating.nil? %>
+                      <p id="average-rating">Unrated</p>
+                  <% else %>
+                      <p id="average-rating"><%= @reading_list_paper.global_rating %> / 5.0</p>
+                  <% end %>
+              </td>
+          </tr>
+      </table>
+      <%= button_to 'Download the full paper', @paper.url, :class => "btn btn-success full-paper-btn" %>
+  </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Comments and Notes</h3>
+    </div>
+    <div class="panel-body">
+        <% if !@reading_list_paper.recent_comments.present? %>
+            <div class="alert alert-info" id="empty-table-msg">No comments yet. Be the first to post!</div>
+        <% end %>
+        <%= form_for Comment.new,
+            remote: true,
+            :html => { role: "form", :class => "comment-form" } do |f| %>
+
+          <%= text_area :comment, :text,
+              :class => "form-control comment-input",
+              rows: 3, cols: 120,
+              placeholder: "Enter comment..."  %>
+
+          <%= hidden_field_tag "reading_list_paper_id", @reading_list_paper.id %>
+
+          <%= f.submit "Post Comment",
+              :class => "btn btn-primary btn-xs post-comment-btn" %>
+
+        <% end %>
+        <div id="paper_comments">
+            <% if @reading_list_paper.recent_comments.present? %>
+                <%= render "comments/comments", comments: @reading_list_paper.recent_comments %>
+                <%= link_to "Load more comments...", load_comments_path, :remote => true, :class => "load-comments-button" %>
+            <% end %>
+        </div>
+    </div>
+</div>
+

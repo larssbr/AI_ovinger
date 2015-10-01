@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  group: one
+  reading_list: one
+  access_rights: readwrite
+
+two:
+  group: one
+  reading_list: two
+  access_rights: readonly

@@ -1,0 +1,27 @@
+<div class="col-md-4">
+    <div class="panel panel-primary">
+        <div class="panel-heading" id="reading-list-form-heading"><%= form_title %></div>
+        <div class="panel-body">
+            <%= form_for(@reading_list, :html => { :class => 'form-inline' }) do |f| %>
+                <% if @reading_list.errors.any? %>
+                    <div id="error_explanation">
+                        <h2><%= pluralize(@reading_list.errors.count, "error") %> prohibited this reading_list from being saved:</h2>
+
+                        <ul>
+                            <% @reading_list.errors.full_messages.each do |msg| %>
+                                <li><%= msg %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <%= f.text_field :name, :class => 'form-control', :placeholder => 'Enter Name' %>
+                </div>
+                <%= f.submit 'Save', :class => 'btn btn-primary' %>
+            <% end %>
+        </div>
+    </div>
+</div>
+

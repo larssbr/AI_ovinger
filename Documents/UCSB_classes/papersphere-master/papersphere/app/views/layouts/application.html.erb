@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Papersphere</title>
+  
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <!--div class="navbar-header">
+      <img width="60" haight="60" src="/logo.png" alt="PaperSphere" />
+    </div-->
+    <div class="navbar-header">
+       <a class="navbar-brand" href="/">PaperSphere</a>
+    </div>
+    
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      
+      <% if user_signed_in? %>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="<%= is_active('reading_lists') %>"><%= link_to 'My Reading Lists', reading_lists_path, :class => 'top-link' %></li>
+        <li class="<%= is_active('groups') %>"><%= link_to 'My Groups', groups_path, :class => 'top-link' %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle top-link" data-toggle="dropdown"><%= current_user.name %><b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li class="<%= is_active('edit_user_registration') %>"><%= link_to 'My Profile', edit_user_registration_path, :class => 'top-link' %></li>
+              <li><%= link_to 'Log Out', '/users/sign_out', :method => :delete %></li>
+          </ul>
+        </li>
+      </ul>
+      <% end %>
+    </div>
+    
+  </nav>
+
+  <div id="notice-box" class="page-top-alert alert alert-info alert-dismissable <%= notice.present? ? '' : 'hidden' %>">
+    <button type="button" class="close" aria-hidden="true">&times;</button>
+    <p id="notice-text" class="notice-text"><%= notice %></p>
+  </div>
+  <div id="danger-box" class="page-top-alert alert alert-danger alert-dismissable <%= alert.present? ? '' : 'hidden' %>">
+    <button type="button" class="close" aria-hidden="true">&times;</button>
+    <p id="danger-text" class="alert-text"><%= alert %></p>
+  </div>
+  <%= javascript_tag do %>
+    $('.alert .close').on('click', function() {
+      $(this).parent().addClass('hidden');
+    });
+  <% end %>
+  
+  <div class="page-content">
+  <%= yield %>
+  </div>
+
+  <% if content_for? :scripts %>
+    <%= yield :scripts %>
+  <% end %>
+</body>
+</html>

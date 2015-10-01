@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: Paper1
+  author: Author et al
+  year: 1
+  publication: Awesom-O
+  url: foo.com
+  paper_code: TEST_100
+
+two:
+  title: MyString
+  author: MyString
+  year: 1
+  publication: MyString
+  url: MyString
+  paper_code: TEST_101

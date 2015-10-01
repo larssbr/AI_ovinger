@@ -1,0 +1,13 @@
+<br/>
+<table class="table table-striped comments-table">
+  <thead>
+    <tr>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% comments.each do |comment| %>
+      <%= render comment %>
+    <% end %>
+  </tbody>
+</table>

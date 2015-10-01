@@ -1,0 +1,9 @@
+<% if @comments_to_display.present? %>
+{
+  <% @comments_to_display.each_with_index do |comment, index| %>
+    "<%= index %>":"<%=raw with_format("html") { render(comment).to_s.delete("\n").gsub('"', "'") } %>"<%= "," unless index == @comments_to_display.count-1 %>
+  <% end %>
+}
+<% else %>
+{}
+<% end %>

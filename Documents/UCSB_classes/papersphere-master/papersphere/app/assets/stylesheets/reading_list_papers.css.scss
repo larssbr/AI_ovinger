@@ -1,0 +1,83 @@
+// Place all the styles related to the ReadingListPapers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.reading-list-paper-dl dt {
+  width: auto;
+}
+.reading-list-paper-dl dd {
+  margin-left: 120px;
+}
+
+.btn.btn-primary.full-paper-btn {
+  margin-bottom: 1em;
+}
+
+.reading-list-paper-panel .panel-heading {
+  background-color: #428bca;
+  
+  h3 {
+    color: white;
+  }
+}
+
+.comment-form {
+  margin-top: 1em;
+  
+  input[type=submit] {
+    margin-top: 1em;
+  }
+}
+
+.table tbody>tr>td {
+  border-top: none;
+}
+
+.comments-table {
+  
+  .comment-author {
+    float: left;
+  }
+  
+  .timestamp {
+    text-align: right;
+    margin: 0;
+  }
+  
+}
+
+form.rating_ballot {
+  
+  input#rating_submit, input.rating_button {
+    display: none;
+  }
+  
+  label.rating {
+    cursor: pointer;
+    display: block;
+    height: 20px;
+    width: 20px;
+    float: left;
+    margin-right: 2px;
+    background-image: url(star_dim.png);
+    
+    span {
+      display: none;
+    }
+    
+  }
+  
+  label.rating.bright {
+    background-image: url(star_bright.png);
+  }
+  
+  label.rating.glow {
+    background-image: url(star_glow.png);
+  }
+}
+
+.paper-info-header {
+  width: 150px;
+  text-align: right;
+  font-weight: bolder;
+}

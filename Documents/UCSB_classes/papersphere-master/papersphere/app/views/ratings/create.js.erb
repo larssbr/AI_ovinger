@@ -1,0 +1,8 @@
+var ratingForm = $('form#new_rating');
+if (ratingForm)
+{
+  ratingForm.attr("id", "edit_rating_<%= @rating.id %>");
+  ratingForm.attr("method", "put");
+  ratingForm.attr("action", "<%= rating_path(@rating) %>")
+}
+$('p#average-rating').text("<%= @reading_list_paper.average_rating %> / 5.0");

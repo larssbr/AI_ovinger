@@ -1,0 +1,30 @@
+namespace :setup do
+    desc 'Change Directory Structure'
+    task :change_dir_structure do
+        subdir = 'papersphere'
+        on roles(:web) do
+            execute "mv #{release_path}/#{subdir}/ /tmp && rm -rf #{release_path}/* && mv /tmp/#{subdir}/* #{release_path} && rm -rf /tmp/#{subdir}"
+        end
+    end
+    after 'deploy:updating', 'setup:change_dir_structure'
+
+    desc 'Create Database'
+    task :create_database do
+        on roles(:db) do
+            within release_path do
+                execute :rake, 'db:create'
+            end
+        end
+    end
+    after 'setup:change_dir_structure', 'setup:create_database'
+    before 'setup:create_database', 'rvm:hook'
+    before 'setup:create_database', 'bundler:install'
+    
+    desc "Uploads SQL Dump"
+    task :upload_mysql_dump => ENV['PROD_SQL_DUMP'] do |t|
+      on roles(:all) do
+        upload!(t.prerequisites.first, "#{current_path}/mysql_dump.sql")
+        execute "mysql -uroot papersphere_production < #{current_path}/mysql_dump.sql"
+      end
+    end
+end

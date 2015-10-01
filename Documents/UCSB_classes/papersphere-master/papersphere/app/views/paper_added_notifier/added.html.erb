@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <title>You have been added to the group.</title>
+  <style type="text/css">
+    body {
+        font-family: helvetica, arial, sans-serif;
+        background: #ffffff;
+        margin: 0;
+        padding: 0;
+        color: #3a87ad;
+    }
+
+    ul, ol, dl { 
+        padding: 0;
+        margin: 0;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+                margin-bottom: 0;
+        padding-right: 15px;
+        padding-left: 15px;
+                color: white;
+    }
+
+    p{
+        font-size: 15px;
+        color: #3a87ad;
+    }
+
+    a:link {
+        color: white;
+        font-size: 20px;
+        text-decoration: none;
+    }
+    a:visited {
+        color: #225d97;
+        text-decoration: none;
+    }
+
+    .message-body {
+        margin-left: 20px;  
+    }
+
+    .footer-link {
+        font-size: 12px;
+                color: #3a87ad;
+    }
+   
+  </style>
+  </head>
+  <body>
+    <table width="650" border="0" align="center" cellpadding="15px" cellspacing="0" bgcolor="#ffffff">
+      <tr bgcolor="#000000" >
+        <td colspan="3" nowrap="nowrap"><a margin-bottom="0"  padding-bottom="0" href="#">PaperSphere </a></td>
+      </tr>
+      <tr>
+      <td width="650">
+        <p>Dear <%= @user.first_name =%>, </p>
+        <p><%= @first_name =%> added paper &#34;<%= @title =%>&#34; to the &#34;<%= @reading_list_name =%>&#34; reading list.</p>
+        <p>Happy sharing!</p>
+      </td>
+      <tr>
+        <td>
+          <hr>
+          <p class="footer-link"> &#169;PaperSphere</p></td>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

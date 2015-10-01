@@ -1,0 +1,5 @@
+<tr>
+    <td><%= group_member.user.name %></td>
+    <td><%= group_member.user.email %></td>
+    <td><%= link_to 'Remove', group_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

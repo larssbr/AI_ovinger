@@ -1,0 +1,16 @@
+<% reading_list_shares = @reading_list.reading_list_shares.all %>
+<% if reading_list_shares.length > 0 %>
+    <table class="table table-striped table-hover">
+        <% reading_list_shares.each do |share| %>
+            <tr>
+                <td><%= link_to share.group.name , group_path(share.group, :from_reading_list => @reading_list.id) %></td>
+                <td><%= share.access_rights %></td>
+                <% if @reading_list.user == current_user %>
+                  <td><%= link_to 'Unshare', share, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <% end %>
+           </tr>
+        <% end %>
+    </table>
+<% else %>
+    <div class="alert alert-info">This list has not been shared.</div>
+<% end %>

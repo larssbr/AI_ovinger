@@ -1,0 +1,139 @@
+@import "bootstrap/variables";
+
+a.empty-link {
+  cursor: pointer;
+}
+
+#whole-body {
+  margin-top: 36px;
+  @media (max-width: $grid-float-breakpoint) {
+    margin-top: 51px;
+  }
+  &.announcement-margin {
+    margin-top: 102px;
+    @media (max-width: $grid-float-breakpoint) {
+      margin-top: 117px;
+    }
+  }
+}
+
+form.compact-form {
+  .heading {
+    margin-bottom: 10px;
+  }
+  .form-control {
+    position: relative;
+    height: auto;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+    &:focus {
+      z-index: 2;
+    }
+  }
+  div.form-group {
+    &.top {
+      margin-bottom: -1px;
+      input {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+    &.middle {
+      margin-bottom: -1px;
+      input {
+        border-radius: 0;
+      }
+    }
+    &.bottom {
+      margin-bottom: 10px;
+      input {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+    .form-control-feedback {
+      padding-top: 4px;
+    }
+  }
+}
+
+#registration_modal {
+
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  div.alert {
+    li {
+      margin-left: 20px;
+    }
+  }
+
+  form span.help-block {
+    display: none;
+  }
+
+}
+
+#super-admin-panel {
+  position: fixed;
+  background: white;
+  display: block;
+  bottom: 0;
+  right: 0;
+  min-width: 250px;
+  min-height: 100px;
+  border-top-left-radius: 12px;
+  border-style: solid none none solid;
+  border-width: 1px;
+}
+
+
+@media (min-width: $screen-sm-min) {
+  div.modal-dialog {
+    margin-top: 66px;
+  }
+}
+
+.navbar-brand {
+  height: inherit !important;
+
+  @media(max-width: $grid-float-breakpoint) {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+  }
+}
+
+.navbar {
+  min-height: 36px !important;
+  padding-top: 0px !important;
+}
+
+div.flashes {
+  position: absolute;
+  z-index: 999;
+  margin-top: 16px;
+
+  @media (min-width: $screen-sm-min) {
+    left: calc(50% - #{$container-sm/2});
+  }
+
+  @media (min-width: $screen-md-min) {
+    left: calc(50% - #{$container-md/2});
+  }
+
+  @media (min-width: $screen-lg-min) {
+    left: calc(50% - #{$container-lg/2});
+  }
+
+  @media (max-width: $screen-xs-max) {
+    left: 0;
+    margin-left: 0;
+    margin-right: 5px;
+    width: 100%;
+  }
+}
+

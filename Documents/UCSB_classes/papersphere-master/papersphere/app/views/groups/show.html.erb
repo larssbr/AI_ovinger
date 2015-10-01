@@ -1,0 +1,60 @@
+<% if @reading_list.nil? %>
+    <ol class="breadcrumb">
+        <li><a href="<%= reading_lists_path %>">Home</a></li>
+        <li><a href="<%= groups_path %>">My Groups</a></li>
+        <li class="active"><%= @group.name %></li>
+    </ol>
+<% else %>
+    <ol class="breadcrumb">
+        <li><a href="<%= reading_lists_path %>">Home</a></li>
+        <li><a href="<%= reading_list_path(@reading_list) %>"><%= @reading_list.name %></a></li>
+        <li class="active"><%= @group.name %></li>
+    </ol>
+<% end %>
+
+<div class="page-header">
+    <h1><%= @group.name %></h1>
+</div>
+
+<% if @group_member.group.owner == current_user %>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Add Group Members</div>
+                <div class="panel-body">
+                    <%= form_for @group_member, :html => { :class => 'form-inline' } do |f| %>
+                        <%= f.hidden_field :group_id %>
+                        <div class="form-group">
+                            <label for="name">New Group Member (E-mail)</label>
+                            <input name="member_email" type="text" placeholder="E-mail"/>
+                        </div>
+                        <%= f.submit 'Add', :class => 'btn btn-primary' %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <%= render 'form', :form_title => 'Rename Group' %>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Group Members (<%= @group.group_members.length %>)</div>
+                <div class="panel-body">
+                    <% if @group.group_members.length > 0 %>
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <th>Name</th>
+                                <th>E-mail</th>
+                                <th></th>
+                            </tr>
+                            <%= render @group.group_members %>
+                        </table>
+                    <% else %>
+                        <div class="alert alert-info">There are no members in this group.</div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%= render :partial => 'group_shares' %>
+<% end %>

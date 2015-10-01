@@ -1,0 +1,38 @@
+<h1>List of Projects</h1>
+<%= link_to 'New Project', new_project_path, class: 'btn btn-success btn-sm' if can? :create, Project %>
+<br/>
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.title %></td>
+        <td><%= link_to 'Show', project, class: 'btn btn-info btn-sm' %></td>
+        <% if can? :edit, project %>
+            <td><%= link_to 'Edit', edit_project_path(project), class: 'btn btn-warning btn-sm' %></td>
+        <% end %>
+        <% if can? :destroy, project %>
+            <td><%= link_to 'Destroy', project, class: 'btn btn-danger btn-sm', method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<div class="tags-cloud glassy-bg">
+  <h4>Popular Tags</h4>
+  <% tag_cloud Tag.counts, %w{tag-cloud1 tag-cloud2 tag-cloud3 tag-cloud4} do |tag, css_class| %>
+      <%= link_to tag.name, projects_path(tag: tag.name), class: css_class %>
+  <% end %>
+</div>
+<br>
+
+<div><%= will_paginate @projects %></div>

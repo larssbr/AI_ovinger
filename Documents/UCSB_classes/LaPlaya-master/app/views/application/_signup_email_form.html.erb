@@ -1,0 +1,11 @@
+<%= semantic_form_for new_user, url: user_preregistration_path, html: {
+                                      id: 'signup-email-form',
+                                      class: 'compact-form',
+                                      remote: true
+                              } do |f| %>
+    <h5 class="heading">Or sign up using your email</h5>
+    <%= f.semantic_errors :email, :password, :password_confirmation, :provider, :uid, :username %>
+    <%= f.input :email, placeholder: 'email', label: false, wrapper_html: {class: 'top'} %>
+    <%= f.input :password, placeholder: 'password', label: false, wrapper_html: {class: 'middle'} %>
+    <%= f.input :password_confirmation, placeholder: 'password_confirmation', label: false, wrapper_html: {class: 'bottom'} %>
+<% end %>

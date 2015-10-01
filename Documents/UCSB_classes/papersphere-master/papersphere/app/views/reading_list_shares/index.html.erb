@@ -1,0 +1,27 @@
+<h1>Listing reading_list_shares</h1>
+
+<table>
+  <tr>
+    <th>Group</th>
+    <th>Reading list</th>
+    <th>Access rights</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @reading_list_shares.each do |reading_list_share| %>
+  <tr>
+    <td><%= reading_list_share.group_id %></td>
+    <td><%= reading_list_share.reading_list_id %></td>
+    <td><%= reading_list_share.access_rights %></td>
+    <td><%= link_to 'Show', reading_list_share %></td>
+    <td><%= link_to 'Edit', edit_reading_list_share_path(reading_list_share) %></td>
+    <td><%= link_to 'Destroy', reading_list_share, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Reading list share', new_reading_list_share_path %>

@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <% shared_lists = @group.reading_list_shares.all %>
+            <div class="panel-heading">Reading Lists Shared with the Group (<%= shared_lists.length %>)</div>
+            <div class="panel-body">
+                <% if shared_lists.length > 0 %>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th>Reading List</th>
+                            <th>Access Rights</th>
+                        </tr>
+                        <% shared_lists.each do |share| %>
+                            <tr>
+                                <td><%= link_to share.reading_list.name , reading_list_path(share.reading_list, :from_group => @group.id) %></td>
+                                <td><%= share.access_rights %></td>
+                            </tr>
+                        <% end %>
+                    </table>
+                <% else %>
+                    <div class="alert alert-info">No lists have been shared with this group.</div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

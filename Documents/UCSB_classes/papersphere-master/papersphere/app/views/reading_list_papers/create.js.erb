@@ -1,0 +1,7 @@
+$('#paper-listing').html("<%=j render :partial => 'reading_lists/paper_list', :content_type => 'text/html' %>")
+$('#notice-text').html("<%= @paper_mgt_notification %>")
+$('#notice-box').removeClass('hidden')
+
+<% if @success %>
+document.getElementById('btn_div_<%= @paper.paper_code %>').innerHTML = '<%= submit_tag 'Add', :class => 'btn btn-primary btn-sm', :disabled => true %>'
+<% end %>

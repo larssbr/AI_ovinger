@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  reading_list_paper: one
+  user: alice
+  value: 1
+
+two:
+  reading_list_paper: two
+  user: bob
+  value: 1

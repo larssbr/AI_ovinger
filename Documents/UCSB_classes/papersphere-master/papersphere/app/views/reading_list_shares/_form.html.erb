@@ -1,0 +1,29 @@
+<%= form_for(@reading_list_share) do |f| %>
+  <% if @reading_list_share.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reading_list_share.errors.count, "error") %> prohibited this reading_list_share from being saved:</h2>
+
+      <ul>
+      <% @reading_list_share.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :group_id %><br />
+    <%= f.number_field :group_id %>
+  </div>
+  <div class="field">
+    <%= f.label :reading_list_id %><br />
+    <%= f.number_field :reading_list_id %>
+  </div>
+  <div class="field">
+    <%= f.label :access_rights %><br />
+    <%= f.text_field :access_rights %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

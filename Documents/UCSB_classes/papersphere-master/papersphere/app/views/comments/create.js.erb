@@ -1,0 +1,13 @@
+<% if @comment.errors.empty? %>
+  var commentsTable = $('.page-content').find('.comments-table');
+  if (commentsTable.find('tbody tr').size() == 0) {
+    $('#paper_comments ').html("<%=j render 'comments/comments', :comments => @reading_list_paper.comments %>");
+    $('#empty-table-msg').before().remove();
+  } else {
+    commentsTable.find('tbody').prepend("<%=j render @comment %>");
+  }
+  $('.comment-form .comment-input').val('');
+<% else %>
+  $('div.alert-danger').removeClass('hidden');
+  $('.alert-text').text("Can't submit an empty comment!");
+<% end %>
